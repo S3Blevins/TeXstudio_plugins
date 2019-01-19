@@ -1,0 +1,36 @@
+{
+"name" : "Ordinal From Superscript" ,
+"tag" : [
+ "%SCRIPT",
+ "",
+ "// global reach (whole project) using \"g\"",
+ "options = \"g\"",
+ "scope = editor.document().cursor(0, 0, -1);",
+ "",
+ "// find all instances of a number next to a \"\textsuperscipt{}\" tag",
+ "editor.replace(/(\d+\\textsuperscript\{)[st|nd|rd|th]+\}/, options, scope, ",
+ "// function to replace values.",
+ "function(c){",
+ "	// select the text and split by ordinal suffix",
+ "    idx = c.selectedText();",
+ "    idxSplit = idx.split(/(\d+)/);",
+ "    ",
+ "    // assign vaues and return replacement string",
+ "	value = idxSplit[1];",
+ "	tag = idxSplit[2];",
+ "	",
+ "	// length for substring",
+ "	length = tag.length;",
+ "",
+ "	// return value and the suffix alone without the tag",
+ "	return value + tag.substring(length - 3, length - 1);",
+ "});"
+ ],
+"description" : [
+ "Finds all instances of an ordinal number and superscripts the suffix (st, nd, rd, th)"
+ ],
+"abbrev" : "" ,
+"trigger" : "" ,
+"menu" : "" ,
+"shortcut" : "Ctrl+Alt+F"
+}
